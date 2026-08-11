@@ -15,7 +15,7 @@ export default function Header({ score, bestScore }) {
             textShadow: '2px 2px #2a75bb,4px 4px #2a75bb',
           }}
         >
-          PokeFlip
+          CardQuest
         </h1>
 
         <p style={{ color: '#ffcb05', fontSize: '16px' }}>
