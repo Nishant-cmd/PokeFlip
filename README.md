@@ -1,2 +1,1 @@
-# PokeFlip
-A fun pokemon memory card game.
+A fun pokemon card flip game.
