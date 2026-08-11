@@ -1,1 +1,1 @@
-A fun pokemon card flip game.
+A fun pokemon card recall game.
