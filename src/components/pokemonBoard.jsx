@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import getData from '../api/api.js';
 import Card from './cards';
 
-const url = 'https://pokeapi.co/api/v2/pokemon?limit=12&offset=0';
+const url = 'https://pokeapi.co/api/v2/pokemon?limit=30&offset=0';
 
 function shuffle(arr) {
   let shuffleArr = arr.slice();
@@ -18,9 +18,9 @@ function shuffle(arr) {
   return shuffleArr;
 }
 
-export default function CardBoard({ score, setScore, bestScore, setBestScore }) {
+export default function CardBoard({ score, setScore, bestScore, setBestScore, setGame }) {
   const [pokemonData, setPokemonData] = useState([]);
-  const currentPokemon = useRef('');
+  const visitedPokemon = useRef([]);
   const randomPokemon = shuffle(pokemonData);
   useEffect(() => {
     getData(url)
@@ -31,14 +31,16 @@ export default function CardBoard({ score, setScore, bestScore, setBestScore }) 
   }, []);
 
   const onClick = (event) => {
-    if (currentPokemon.current === event.currentTarget.id) {
+    if (visitedPokemon.current.includes(event.currentTarget.id)) {
       setScore(0);
+      setGame(true);
+      visitedPokemon.current = [];
       return;
     } else if (score >= bestScore) {
       setBestScore((prev) => prev + 1);
     }
     event.preventDefault();
-    currentPokemon.current = event.currentTarget.id;
+    visitedPokemon.current.push(event.currentTarget.id);
     setPokemonData(randomPokemon);
     setScore((prev) => prev + 1);
   };
